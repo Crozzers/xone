@@ -10,6 +10,10 @@
 
 `xone` is a Linux kernel driver for Xbox One and Xbox Series X|S accessories. It serves as a modern replacement for `xpad`, aiming to be compatible with Microsoft's *Game Input Protocol* (GIP).
 
+This repo is a fork of the official [xone](https://github.com/medusalix/xone) with some patches applied:
+- fix: build on kernel v6.12 (#53) by tskaar
+- Bring back sysfs pairing (#45) by dlundqvist
+
 ## Compatibility
 
 - [x] Wired devices (via USB)
@@ -67,6 +71,19 @@ Any issues regarding the packaging should be reported to the respective maintain
 - DKMS
 - curl (for firmware download)
 - cabextract (for firmware extraction)
+
+### Quick install
+
+1. Unplug dongle
+2. Run command:
+```bash
+sudo ./install.sh --release && sudo xone-get-firmware.sh
+```
+3. Plug in dongle
+4. Run command:
+```bash
+echo 1 | sudo tee /sys/bus/usb/drivers/xone-dongle/*/pairing
+```
 
 ### Guide
 
